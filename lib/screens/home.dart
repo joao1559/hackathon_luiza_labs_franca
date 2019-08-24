@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_luiza_labs_franca/components/magalu_bar.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,17 +11,15 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Colors.blue, Colors.red]
-              )
-          ),
-        ),
+        title: Text('Mazaguine')
       ),
-      body: Container(),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            MagaluBar(),
+          ],
+        ),
+      )
     );
   }
 }
