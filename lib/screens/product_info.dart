@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_luiza_labs_franca/components/color_loader.dart';
 import 'package:hackathon_luiza_labs_franca/components/magalu_bar.dart';
+import 'package:hackathon_luiza_labs_franca/components/qrcode.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
@@ -45,6 +46,7 @@ class _ProductInfoState extends State<ProductInfo> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Detalhes'),
+        actions: <Widget>[QrCode()],
       ),
       body: Container(
         color: Colors.white,

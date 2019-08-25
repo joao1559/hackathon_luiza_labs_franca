@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hackathon_luiza_labs_franca/components/color_loader.dart';
 import 'package:hackathon_luiza_labs_franca/components/magalu_bar.dart';
 import 'package:hackathon_luiza_labs_franca/components/drawer.dart';
+import 'package:hackathon_luiza_labs_franca/components/qrcode.dart';
 import 'package:hackathon_luiza_labs_franca/screens/product_info.dart';
-import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -29,23 +29,6 @@ class _State extends State<CatalogScreen> {
 
   }
 
-  String _code = '';
-
-  Future _scan() async {
-    try {
-      String result = await BarcodeScanner.scan();
-      setState(() {
-        _code = result;
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) =>
-                ProductInfo(_code)));
-      });
-    } on PlatformException catch (e) {
-    } on FormatException catch (e) {
-    } catch (e) {
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,11 +40,7 @@ class _State extends State<CatalogScreen> {
             height: 24,
           ),
           actions: <Widget>[
-            IconButton(
-              icon: new Image.asset('assets/qrcode.png'),
-              tooltip: 'Ler QR code',
-              onPressed: _scan,
-            )
+            QrCode()
           ],
         ),
         body: Container(
