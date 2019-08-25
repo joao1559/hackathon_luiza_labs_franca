@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_luiza_labs_franca/components/color_loader.dart';
 import 'package:hackathon_luiza_labs_franca/components/magalu_bar.dart';
 import 'package:hackathon_luiza_labs_franca/components/drawer.dart';
 import 'package:hackathon_luiza_labs_franca/screens/product_info.dart';
-import 'package:hackathon_luiza_labs_franca/screens/updated_product.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -65,6 +65,7 @@ class _State extends State<CatalogScreen> {
           ],
         ),
         body: Container(
+          color: Colors.white,
           child: Column(
             children: <Widget>[
               MagaluBar(),
@@ -83,10 +84,17 @@ class _State extends State<CatalogScreen> {
                             width: 200.0,
                             height: 200.0,
                             alignment: Alignment.center,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                  Colors.white),
-                              strokeWidth: 5.0,
+                            child: ColorLoader(
+                              colors: [
+                                Color.fromRGBO(252, 208, 0, 1),
+                                Color.fromRGBO(255, 138, 0, 1),
+                                Color.fromRGBO(255, 37, 58, 1),
+                                Color.fromRGBO(255, 55, 168, 1),
+                                Color.fromRGBO(164, 0, 225, 1),
+                                Color.fromRGBO(0, 134, 255, 1),
+                                Color.fromRGBO(0, 214, 4, 1),
+                              ],
+                              duration: Duration(milliseconds: 1200),
                             ),
                           );
                         default:
@@ -144,7 +152,7 @@ class _State extends State<CatalogScreen> {
             onTap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) =>
-                      ProductInfo(snapshot.data['data'][index]['id'])));
+                      ProductInfo(snapshot.data['data'][index]['id'].toString())));
             },
           );
         }

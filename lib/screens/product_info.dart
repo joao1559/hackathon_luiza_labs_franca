@@ -6,7 +6,7 @@ import 'dart:async';
 import 'dart:convert';
 
 class ProductInfo extends StatefulWidget {
-  int _id;
+  String _id;
 
   ProductInfo(id) {
     this._id = id;
@@ -17,7 +17,7 @@ class ProductInfo extends StatefulWidget {
 }
 
 class _ProductInfoState extends State<ProductInfo> {
-  int _id;
+  String _id;
   bool _loading = true;
   Map<String, dynamic> _product;
 
