@@ -37,7 +37,7 @@ class _State extends State<CatalogScreen> {
     return Scaffold(
       drawer: DrawerAppBar(),
       appBar: AppBar(
-          title: Text('Magazuine Luiza')
+          title: Text('Magalu')
       ),
         body: Container(
           child: Column(
@@ -83,24 +83,37 @@ class _State extends State<CatalogScreen> {
     return GridView.builder(
         padding: EdgeInsets.all(10.0),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: 1/1.3,
             crossAxisCount: 2,
             crossAxisSpacing: 10.0, // espaçamento horizontal
             mainAxisSpacing: 10.0   // espaçamento vertical
         ),
         itemCount: snapshot.data['data'].length,
-//        itemCount: 10,
         itemBuilder: (context, index) {
-          return GestureDetector( // permite clicar na imagem
-            child: Padding(
-              padding: EdgeInsets.all(10),
+          return GestureDetector(
               child: Container(
+                height: 150,
+                padding: EdgeInsets.all(10),
                 child: Column(
                   children: <Widget>[
-                    Image.network(snapshot.data['data'][index]["image"], height: 130, width: 130,),
-                    Text('Descrição do produtsdsds dsdsdsdsds sdsdsdsdsd', textAlign: TextAlign.left, style: TextStyle(height: 1),),
-                    Text('RS 1200')
+                    Image.network(snapshot.data['data'][index]['image'], height: 130, width: 130,),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Text(snapshot.data['data'][index]['name'],
+                        maxLines: 2,
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            height: 1, fontWeight: FontWeight.bold),
+                        overflow: TextOverflow.ellipsis,),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(snapshot.data['data'][index]['price'],
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            height: 1, fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),),
+                    )
                   ],
-                )
               ),
             )
 //            onTap: () {
