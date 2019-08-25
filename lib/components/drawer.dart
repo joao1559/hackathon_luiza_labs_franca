@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_luiza_labs_franca/screens/updated_product_list.dart';
+import 'package:hackathon_luiza_labs_franca/screens/catalog_screen.dart';
 
 class DrawerAppBar extends StatelessWidget {
   @override
@@ -37,14 +39,18 @@ class DrawerAppBar extends StatelessWidget {
             leading: Icon(Icons.home),
             title: Text('Home'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) =>
+                      CatalogScreen()));
             },
           ),
           ListTile(
             leading: Icon(Icons.refresh),
             title: Text('Atualizar Produtos'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) =>
+                      UpdatedProductList()));
             },
           ),
         ],
