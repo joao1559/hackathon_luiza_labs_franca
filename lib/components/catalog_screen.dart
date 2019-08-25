@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_luiza_labs_franca/components/magalu_bar.dart';
 import 'package:hackathon_luiza_labs_franca/components/drawer.dart';
+import 'package:hackathon_luiza_labs_franca/screens/product_info.dart';
+import 'package:hackathon_luiza_labs_franca/screens/updated_product.dart';
+import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -13,10 +17,6 @@ class _State extends State<CatalogScreen> {
   Future<Map> _getProducts() async {
     http.Response response;
 
-//    response = await http.get(
-//        'https://api.giphy.com/v1/gifs/trending?api_key=HACztj0GDk6TgF7RvKjRwRIygczzXwPM&limit=20&rating=G');
-//    return json.decode(response.body);
-
     response = await http.get(
         'https://hackthon-luizalabs-api.herokuapp.com/product');
     return json.decode(response.body);
@@ -27,18 +27,43 @@ class _State extends State<CatalogScreen> {
     // TODO: implement initState
     super.initState();
 
-//    _getProducts().then((map) {
-//      print(map);
-//    });
+  }
+
+  String _code = '';
+
+  Future _scan() async {
+    try {
+      String result = await BarcodeScanner.scan();
+      setState(() {
+        _code = result;
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) =>
+                ProductInfo(_code)));
+      });
+    } on PlatformException catch (e) {
+    } on FormatException catch (e) {
+    } catch (e) {
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: DrawerAppBar(),
-      appBar: AppBar(
-          title: Text('Magalu')
-      ),
+        appBar: AppBar(
+//        centerTitle: true,
+          title: Image.asset(
+            'assets/magalu_logo.png',
+            height: 24,
+          ),
+          actions: <Widget>[
+            IconButton(
+              icon: new Image.asset('assets/qrcode.png'),
+              tooltip: 'Ler QR code',
+              onPressed: _scan,
+            )
+          ],
+        ),
         body: Container(
           child: Column(
             children: <Widget>[
@@ -115,12 +140,12 @@ class _State extends State<CatalogScreen> {
                     )
                   ],
               ),
-            )
-//            onTap: () {
-//              Navigator.push(context,
-//                  MaterialPageRoute(builder: (context) =>
-//                      GifPage(snapshot.data['data'][index])));
-//            },
+            ),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) =>
+                      ProductInfo(snapshot.data['data'][index]['id'])));
+            },
           );
         }
     );
