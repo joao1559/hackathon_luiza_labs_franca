@@ -12,7 +12,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="hackathon_luiza_labs_franca"
+        android:label="Hackathon Luizalabs"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
